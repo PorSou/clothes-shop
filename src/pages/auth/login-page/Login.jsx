@@ -1,7 +1,7 @@
 // src/pages/login-page/Login.jsx
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loginSuccess } from "../../features/auth/authSlice";
+import { loginSuccess } from "../../../features/auth/authSlice";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 
 const Login = () => {

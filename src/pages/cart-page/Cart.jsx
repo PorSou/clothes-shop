@@ -29,7 +29,7 @@ const Cart = () => {
 
   return (
     <div
-      className={`px-4 py-8 mb-80 transition-colors duration-300 ${
+      className={`px-4 py-8 mb-20 transition-colors duration-300 ${
         theme === "dark"
           ? "bg-gray-900 text-gray-100"
           : "bg-stone-50 text-gray-900"

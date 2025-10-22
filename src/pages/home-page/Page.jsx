@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 export default function Home() {
   const images = [
@@ -10,7 +11,6 @@ export default function Home() {
     "https://makersrow.com/wp-content/uploads/2025/04/fast-fashion-vs-slow-sustainable-fashion-1024x683.webp",
     "https://www.efulfillmentservice.com/wp-content/uploads/2023/12/Apparel.jpg",
     "https://www.orfonline.org/public/uploads/posts/image/img-fashion-apparel.jpg",
-    "https://m.foolcdn.com/media/dubs/original_images/clothing_hanging_on_a_rack_in_a_store_fashion_retail_apparel_clothes.jpg",
   ];
 
   const [currentImage, setCurrentImage] = useState(0);
@@ -18,7 +18,7 @@ export default function Home() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImage((prev) => (prev + 1) % images.length);
-    }, 2000);
+    }, 2500);
     return () => clearInterval(interval);
   }, []);
 
@@ -32,33 +32,74 @@ export default function Home() {
         <div className="absolute inset-0 bg-black/40" />
       </div>
 
+      {/* 🪐 Floating top-right icon */}
+      <motion.div
+        className="absolute flex items-center justify-center text-white rounded-full shadow-xl top-8 right-8 bg-gradient-to-tr from-yellow-300 via-orange-400 to-pink-500"
+        style={{
+          width: 70,
+          height: 70,
+          fontSize: 32,
+        }}
+        animate={{
+          rotate: 360,
+          scale: [1, 1.15, 1],
+          y: [0, -10, 0],
+        }}
+        transition={{
+          repeat: Infinity,
+          duration: 6, // slower, smoother spin
+          ease: "easeInOut",
+        }}
+      >
+        ⭐
+      </motion.div>
+
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center justify-center w-full max-w-5xl px-6 py-12 text-center lg:items-start sm:px-12 lg:px-16 lg:text-left">
-        <h1
+        {/* Title */}
+        <motion.h1
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: "easeOut" }}
           className="mb-4 font-extrabold leading-tight text-white"
-          style={{
-            fontSize: "clamp(2rem, 5vw, 4rem)",
-          }}
+          style={{ fontSize: "clamp(2rem, 5vw, 4rem)" }}
         >
           Discover Your Style
-        </h1>
-        <p
+        </motion.h1>
+
+        {/* Paragraph */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: "easeOut", delay: 0.5 }}
           className="max-w-3xl mb-6 text-base text-white sm:text-lg md:text-xl lg:text-2xl"
           style={{ lineHeight: 1.4 }}
         >
           Trendy outfits for every occasion. Comfortable, stylish, and crafted
           to make you stand out.
-        </p>
-        <Link to="/shop">
-          <button className="flex items-center gap-3 px-6 py-3 text-sm font-semibold tracking-wider text-white uppercase transition-all duration-300 bg-transparent border-2 border-white hover:bg-white hover:text-gray-900 group">
-            <span className="inline-block pr-3 border-r-2 border-white">
-              Shop Now
-            </span>
-            <span className="inline-block transition-transform duration-300 ease-out transform group-hover:translate-x-1">
-              →
-            </span>
-          </button>
-        </Link>
+        </motion.p>
+
+        {/* Button */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: "easeOut", delay: 1 }}
+        >
+          <Link to="/shop">
+            <button className="flex items-center gap-3 px-6 py-3 text-sm font-semibold tracking-wider text-white uppercase transition-all duration-300 bg-transparent border-2 border-white cursor-pointer group hover:bg-white hover:text-gray-900">
+              <span className="relative inline-flex items-center space-x-2 transition-transform duration-300 h-7 group-hover:translate-x-1">
+                <span className="absolute flex items-center h-full text-white -left-3">
+                  |
+                </span>
+                <span>Shop Now</span>
+              </span>
+
+              <span className="inline-block transition-transform duration-300 ease-out transform group-hover:translate-x-1">
+                →
+              </span>
+            </button>
+          </Link>
+        </motion.div>
       </div>
     </div>
   );

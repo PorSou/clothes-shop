@@ -80,7 +80,7 @@ const Shop = ({ search }) => {
       </p>
       <h2 className="text-xl text-red-600">Filters</h2>
 
-      {/* Mobile controls */}
+      {/* Mobile controls: shown below lg: */}
       <div className="flex items-center justify-between mb-4 lg:hidden">
         <button
           onClick={() => setIsFiltersOpen(!isFiltersOpen)}
@@ -101,12 +101,13 @@ const Shop = ({ search }) => {
 
       {/* Main layout */}
       <div
-        className="flex flex-col lg:flex-row lg:relative lg:gap-14"
+        className="flex flex-col lg:flex-row lg:gap-14" // Correctly uses flex-row on lg: and stacks on mobile/tablet
         ref={containerRef}
       >
         {/* Filters column */}
         <div
           className={`w-full lg:w-1/5 ${
+            // lg:w-1/5 applies only on desktop
             isFiltersOpen ? "block mb-6" : "hidden"
           } lg:block`}
         >
@@ -125,8 +126,8 @@ const Shop = ({ search }) => {
 
         {/* Products column */}
         <div className="flex flex-col flex-1 p-0 lg:p-4 lg:rounded-lg">
-          {/* Sort dropdown (desktop) */}
-          <div className="absolute justify-end hidden lg:flex -top-20 right-5">
+          {/* Sort dropdown (desktop) - Shown above lg: */}
+          <div className="justify-end hidden mb-4 lg:flex">
             <SortDropdown
               sortOrder={sortOrder}
               onSortChange={setSortOrder}

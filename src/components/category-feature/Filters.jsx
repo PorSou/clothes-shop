@@ -35,7 +35,8 @@ const Filters = ({
 
   return (
     <div
-      className={`p-5 mb-6 space-y-6 shadow-md rounded-5lg w-[300px] ${bgClass} ${borderClass}`}
+      // w-[300px] removed to make it responsive to its parent container (lg:w-1/5 or w-full)
+      className={`p-5 mb-6 space-y-6 shadow-md rounded-5lg ${bgClass} ${borderClass}`}
     >
       {/* CATEGORY */}
       <div className="w-full">

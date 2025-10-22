@@ -16,7 +16,7 @@ const Favorite = () => {
   if (items.length === 0) {
     return (
       <div
-        className={`flex flex-col min-h-screen ${
+        className={`flex flex-col mb-100 ${
           theme === "dark" ? "bg-gray-900 text-white" : "bg-white text-gray-900"
         }`}
       >

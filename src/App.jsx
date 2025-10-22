@@ -19,11 +19,12 @@ import ProductDetailForCard from "./pages/feature-page/ProductDetailForCard";
 import MarqueeBar from "./components/Marquee";
 import Cart from "./pages/cart-page/Cart";
 import Favorite from "./pages/favorite-page/Favorite";
-import Login from "./pages/login-page/Login";
-import Register from "./pages/auth-page/Register";
+
 import Profile from "./pages/profile-page/Profile";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Checkout from "./pages/checkout-page/Checkout";
+import Register from "./pages/auth/register/Register";
+import Login from "./pages/auth/login-page/Login";
 
 const AppContent = () => {
   const [search, setSearch] = useState("");
