@@ -5,7 +5,6 @@ import { Provider, useSelector } from "react-redux";
 import { store, persistor } from "./app/store";
 import { PersistGate } from "redux-persist/integration/react";
 
-import Home from "./pages/home-page/Page";
 import Shop from "./pages/shop-page/Shop";
 import Men from "./pages/men-page/Men";
 import Women from "./pages/women-page/Women";
@@ -25,6 +24,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Checkout from "./pages/checkout-page/Checkout";
 import Register from "./pages/auth/register/Register";
 import Login from "./pages/auth/login-page/Login";
+import Home from "./pages/home/Page";
 
 const AppContent = () => {
   const [search, setSearch] = useState("");

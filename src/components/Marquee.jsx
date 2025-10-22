@@ -9,21 +9,28 @@ const MarqueeBar = () => {
       icon: "✨",
       text: "Free Shipping on Orders Over $100",
       color: "text-purple-600",
+      darkColor: "text-purple-400",
     },
     {
       icon: "⭐",
       text: "New Spring Collection Now Available",
       color: "text-pink-600",
+      darkColor: "text-pink-400",
     },
     {
       icon: "🚚",
       text: "Fast Delivery in 2-3 Business Days",
       color: "text-green-600",
+      darkColor: "text-green-400",
     },
-    { icon: "🛡️", text: "30-Day Money Back Guarantee", color: "text-blue-600" },
+    {
+      icon: "🛡️",
+      text: "30-Day Money Back Guarantee",
+      color: "text-blue-600",
+      darkColor: "text-blue-400",
+    },
   ];
 
-  // CSS keyframes defined inline
   const marqueeStyle = {
     animation: "marqueeScroll 25s linear infinite",
   };
@@ -77,7 +84,7 @@ const MarqueeBar = () => {
               <span
                 key={`original-${index}`}
                 className={`flex items-center gap-2 text-lg font-medium ${
-                  theme === "dark" ? "text-white" : item.color
+                  theme === "dark" ? item.darkColor : item.color
                 }`}
               >
                 <span>{item.icon}</span>
@@ -92,7 +99,7 @@ const MarqueeBar = () => {
               <span
                 key={`duplicate-${index}`}
                 className={`flex items-center gap-2 text-lg font-medium ${
-                  theme === "dark" ? "text-white" : item.color
+                  theme === "dark" ? item.darkColor : item.color
                 }`}
               >
                 <span>{item.icon}</span>

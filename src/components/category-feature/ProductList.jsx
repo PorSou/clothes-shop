@@ -12,7 +12,7 @@ const ProductList = ({ products }) => {
   // FIX: Added md:grid-cols-3 for medium tablets, allowing 3 columns when
   // the filter sidebar is hidden (below lg:).
   return (
-    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
+    <div className="grid grid-cols-1 gap-6 lg:-mt-20 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
       {products.map((product) => (
         <ProductCard key={product.id} product={product} />
       ))}

@@ -12,7 +12,7 @@ const SortDropdown = ({ sortOrder, onSortChange }) => {
     <select
       value={sortOrder}
       onChange={(e) => onSortChange(e.target.value)}
-      className={`p-2 rounded md:mr-19 lg:mr-0 border ${borderColor} ${bgColor} ${textColor}`}
+      className={`relative lg:-top-30 p-2 rounded border ${borderColor} ${bgColor} ${textColor}`}
     >
       <option value="none">Sort: None</option>
       <option value="lowToHigh">Price: Low to High</option>
