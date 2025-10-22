@@ -1,19 +1,36 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const JoinCommunity = () => {
+  const theme = useSelector((state) => state.theme.mode);
+
   return (
     <div className="flex justify-center">
-      <section className="w-[90%] bg-[#322d25] text-center text-white rounded-md py-16 px-6 my-10 mt-30 mx-4 md:mx-10">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4">
+      <section
+        className={`w-[90%] text-center rounded-md py-16 px-6 my-10 mt-30 mx-4 md:mx-10 transition-colors duration-300 ${
+          theme === "dark"
+            ? "bg-gray-800 text-gray-100"
+            : "bg-[#322d25] text-white"
+        }`}
+      >
+        <h2 className="mb-4 text-3xl font-bold md:text-4xl">
           Join Our Community
         </h2>
-        <p className="text-gray-300 mb-6 text-sm md:text-base">
+        <p
+          className={`mb-6 text-sm md:text-base transition-colors duration-300 ${
+            theme === "dark" ? "text-gray-300" : "text-gray-200"
+          }`}
+        >
           Sign up for exclusive offers and early access to new collections
         </p>
         <Link
-          to="#"
-          className="bg-[#e7e2d9] text-gray-800 px-5 py-2 rounded-md font-medium hover:bg-[#dcd5ca] transition-all duration-200"
+          to="/register"
+          className={`px-5 py-2 rounded-md font-medium transition-all duration-200 ${
+            theme === "dark"
+              ? "bg-gray-200 text-gray-800 hover:bg-gray-300"
+              : "bg-[#e7e2d9] text-gray-800 hover:bg-[#dcd5ca]"
+          }`}
         >
           Create Account
         </Link>

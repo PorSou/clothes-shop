@@ -1,10 +1,12 @@
 import React, { useEffect, useState, useRef } from "react";
+import { useSelector } from "react-redux";
 import { allProducts } from "../../Data";
 import Filters from "../../components/category-feature/Filters";
 import ProductList from "../../components/category-feature/ProductList";
 import SortDropdown from "../../components/category-feature/SortDropdown";
 
 const Men = () => {
+  const theme = useSelector((state) => state.theme.mode); // ✅ get theme
   const menProducts = allProducts.filter(
     (p) => p.category.toLowerCase() === "men"
   );
@@ -15,6 +17,7 @@ const Men = () => {
   const [priceRange, setPriceRange] = useState([minPrice, maxPrice]);
   const [sortOrder, setSortOrder] = useState("none");
   const [filteredProducts, setFilteredProducts] = useState(menProducts);
+  const [isFiltersOpen, setIsFiltersOpen] = useState(false); // mobile toggle
 
   const containerRef = useRef(null);
 
@@ -37,18 +40,50 @@ const Men = () => {
   }, [selectedColor, priceRange, sortOrder]);
 
   return (
-    <div className="min-h-screen px-80 py-10">
-      <h1 className="text-3xl font-bold mb-2">Men's Collection</h1>
-      <p className="text-gray-500 mb-8">
+    <div
+      className={`min-h-screen px-4 py-10 sm:px-8 md:px-10 lg:px-80 ${
+        theme === "dark" ? "bg-gray-900 text-white" : "bg-white text-gray-900"
+      }`}
+    >
+      <h1 className="mb-2 text-3xl font-bold">Men's Collection</h1>
+      <p
+        className={`mb-8 ${
+          theme === "dark" ? "text-gray-300" : "text-gray-500"
+        }`}
+      >
         {filteredProducts.length} products in stock
       </p>
       <h2 className="text-xl text-red-600">Filters</h2>
 
-      <div className="flex gap-8 relative" ref={containerRef}>
-        <div className="w-1/5">
-          <div className="sticky top-20">
+      {/* Mobile buttons */}
+      <div className="flex items-center justify-between mb-4 lg:hidden">
+        <button
+          onClick={() => setIsFiltersOpen(!isFiltersOpen)}
+          className={`px-4 py-2 text-sm font-medium border rounded-lg hover:bg-gray-200 ${
+            theme === "dark"
+              ? "text-gray-300 bg-gray-800 border-gray-600"
+              : "text-gray-700 bg-gray-100 border-gray-300"
+          }`}
+        >
+          {isFiltersOpen ? "Hide Filters" : "Show Filters"}
+        </button>
+        <SortDropdown sortOrder={sortOrder} onSortChange={setSortOrder} />
+      </div>
+
+      {/* Main layout */}
+      <div
+        className="flex flex-col lg:flex-row lg:relative lg:gap-14"
+        ref={containerRef}
+      >
+        {/* Filters section */}
+        <div
+          className={`w-full lg:w-1/5 ${
+            isFiltersOpen ? "block mb-6" : "hidden"
+          } lg:block`}
+        >
+          <div className="lg:sticky lg:top-20">
             <Filters
-              selectedCategory={"men"} // fixed
+              selectedCategory={"men"}
               onCategoryChange={() => {}}
               selectedColor={selectedColor}
               onColorChange={setSelectedColor}
@@ -58,10 +93,13 @@ const Men = () => {
           </div>
         </div>
 
-        <div className="flex-1 p-4 rounded-lg flex flex-col">
-          <div className="mb-4 flex justify-end absolute -top-20 right-5">
+        {/* Product list section */}
+        <div className="flex flex-col flex-1 p-0 lg:p-4 lg:rounded-lg">
+          {/* Desktop dropdown */}
+          <div className="absolute justify-end hidden mb-4 lg:flex -top-20 right-5">
             <SortDropdown sortOrder={sortOrder} onSortChange={setSortOrder} />
           </div>
+
           <ProductList products={filteredProducts} />
         </div>
       </div>

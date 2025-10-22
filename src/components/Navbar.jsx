@@ -1,100 +1,193 @@
-import { useState } from "react";
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../features/auth/authSlice";
+import { clearCart } from "../features/cart/cartSlice";
+import { clearFavorites } from "../features/favorite/favoriteSlice";
+import { toggleTheme } from "../features/theme/themeSlice";
 import {
   FaMoon,
+  FaSun,
   FaHeart,
   FaShoppingCart,
   FaUser,
   FaBars,
 } from "react-icons/fa";
-import { Link } from "react-router-dom";
 
-const Navbar = () => {
-  const [search, setSearch] = useState("");
-  const [menuOpen, setMenuOpen] = useState(false);
+const Navbar = ({ search, setSearch }) => {
+  const [menuOpen, setMenuOpen] = React.useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const handleSearch = (e) => setSearch(e.target.value);
+  // Theme from Redux
+  const theme = useSelector((state) => state.theme.mode);
+
+  const cartQuantity = useSelector((state) => state.cart?.totalQuantity || 0);
+  const favoriteCount = useSelector(
+    (state) => state.favorite?.totalFavorites || 0
+  );
+  const { user, isAuthenticated } = useSelector((state) => state.auth || {});
+
+  const handleLogout = () => {
+    dispatch(logout());
+    dispatch(clearCart());
+    dispatch(clearFavorites());
+    localStorage.removeItem("persist:auth");
+    navigate("/login");
+  };
 
   return (
-    <nav className="backdrop-blur-md bg-gray-100/70  px-4 py-5 shadow-sm sticky top-0 z-50">
-      <div className="flex items-center justify-between max-w-7xl mx-auto">
+    <nav
+      className={`sticky top-0 z-50 px-4 py-5 transition-colors duration-300 shadow-sm backdrop-blur-md ${
+        theme === "dark"
+          ? "bg-gray-900 text-gray-100"
+          : "bg-gray-100 text-gray-900"
+      }`}
+    >
+      <div className="flex items-center justify-between mx-auto max-w-7xl">
         {/* Logo */}
         <div className="flex items-center space-x-2">
           <Link to="/">
             <img
               src="https://img.freepik.com/premium-vector/clothing-store-logo-design-inspiration-cloth-shop-logo-clothes-logo-vector-illustration_148524-764.jpg"
               alt="StyleHub Logo"
-              className="w-10 h-10 object-cover rounded"
+              className="object-cover w-10 h-10 rounded"
             />
           </Link>
-          <span className="font-bold text-lg">
+          <span className="hidden text-lg font-bold sm:block">
             <Link to="/">StyleHub</Link>
           </span>
         </div>
 
-        {/* Hamburger for small screens */}
+        {/* Hamburger */}
         <button
-          className="lg:hidden text-xl"
+          className="absolute text-xl right-4 lg:hidden"
           onClick={() => setMenuOpen(!menuOpen)}
         >
           <FaBars />
         </button>
 
-        {/* Menu Links */}
+        {/* Menu */}
         <ul
-          className={`flex flex-col lg:flex-row lg:space-x-6 absolute lg:static  w-full lg:w-auto left-0 top-16 lg:top-auto p-4 lg:p-0 transition-all duration-300 ease-in-out ${
-            menuOpen ? "block" : "hidden lg:flex"
-          }`}
+          className={`flex flex-col lg:flex-row lg:space-x-6 absolute lg:static w-full lg:w-auto left-0 top-16 lg:top-auto p-4 lg:p-0 transition-all duration-300 ease-in-out ${
+            theme === "dark"
+              ? "bg-gray-900/90 text-gray-100"
+              : "bg-gray-100/90 text-gray-900"
+          } ${menuOpen ? "block" : "hidden lg:flex"}`}
         >
-          <li className="hover:text-gray-700 cursor-pointer">
-            <Link to="/shop">Shop</Link>
-          </li>
-          <li className="hover:text-gray-700 cursor-pointer">
-            <Link to="/men">Men</Link>
-          </li>
-          <li className="hover:text-gray-700 cursor-pointer">
-            <Link to="/women">Women</Link>
-          </li>
-          <li className="hover:text-gray-700 cursor-pointer">
-            <Link to="/kids">Kids</Link>
-          </li>
-
-          {/* Search (only visible on mobile inside menu) */}
-          <div className="block lg:hidden mt-3">
-            <input
-              type="text"
-              value={search}
-              onChange={handleSearch}
-              placeholder="Search products..."
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-300"
-            />
-          </div>
+          {["Shop", "Men", "Women", "Kids"].map((item) => (
+            <li
+              key={item}
+              className="transition-colors duration-300 cursor-pointer hover:opacity-80"
+            >
+              <Link to={`/${item.toLowerCase()}`}>{item}</Link>
+            </li>
+          ))}
         </ul>
 
-        {/* Search Bar (hidden on small) */}
-        <div className="hidden lg:flex flex-1 max-w-lg mx-6">
+        {/* Search Bar */}
+        <div className="relative flex-1 hidden max-w-lg mx-6 sm:flex">
           <input
             type="text"
             value={search}
-            onChange={handleSearch}
+            onChange={(e) => setSearch(e.target.value)}
             placeholder="Search products..."
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-300"
+            className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 transition-colors ${
+              theme === "dark"
+                ? "bg-gray-800 border-gray-600 text-white focus:ring-gray-600"
+                : "bg-white border-gray-300 text-gray-900 focus:ring-gray-400"
+            }`}
           />
         </div>
 
         {/* Icons */}
-        <div className="flex items-center space-x-6 text-gray-700 text-lg">
-          <div className="hover:bg-gray-300 p-2 rounded-2xl transition duration-300 ease-in-out">
-            <FaMoon className="cursor-pointer hover:text-gray-900" />
+        <div className="flex items-center space-x-4 text-lg">
+          {/* Theme Toggle */}
+          <div
+            onClick={() => dispatch(toggleTheme())}
+            className={`p-1.5 transition duration-300 rounded-2xl cursor-pointer ${
+              theme === "dark"
+                ? "hover:bg-gray-700"
+                : "hover:bg-gray-300 text-gray-800"
+            }`}
+          >
+            {theme === "light" ? (
+              <FaMoon />
+            ) : (
+              <FaSun className="text-yellow-400" />
+            )}
           </div>
-          <div className="hover:bg-gray-300 p-2 rounded-2xl transition duration-300 ease-in-out">
-            <FaHeart className="cursor-pointer hover:text-gray-900" />
-          </div>
-          <div className="hover:bg-gray-300 p-2 rounded-2xl transition duration-300 ease-in-out">
-            <FaShoppingCart className="cursor-pointer hover:text-gray-900" />
-          </div>
-          <div className="hover:bg-gray-300 p-2 rounded-2xl transition duration-300 ease-in-out">
-            <FaUser className="cursor-pointer hover:text-gray-900" />
-          </div>
+
+          {/* Favorite */}
+          <Link
+            to="/favorite"
+            className={`relative p-1.5 transition duration-300 rounded-2xl ${
+              theme === "dark"
+                ? "hover:bg-gray-700 text-white"
+                : "hover:bg-gray-300 text-gray-900"
+            }`}
+          >
+            <FaHeart />
+            {favoriteCount > 0 && (
+              <span className="absolute flex items-center justify-center w-4 h-4 text-xs font-bold text-white bg-red-500 rounded-full -top-1 -right-1 sm:w-5 sm:h-5">
+                {favoriteCount}
+              </span>
+            )}
+          </Link>
+
+          {/* Cart */}
+          <Link
+            to="/cart"
+            className={`relative p-1.5 transition duration-300 rounded-2xl ${
+              theme === "dark"
+                ? "hover:bg-gray-700 text-white"
+                : "hover:bg-gray-300 text-gray-900"
+            }`}
+          >
+            <FaShoppingCart />
+            {cartQuantity > 0 && (
+              <span className="absolute flex items-center justify-center w-4 h-4 text-xs font-bold text-white bg-blue-500 rounded-full -top-1 -right-1 sm:w-5 sm:h-5">
+                {cartQuantity}
+              </span>
+            )}
+          </Link>
+
+          {/* Profile/Login */}
+          {isAuthenticated ? (
+            <div className="flex items-center space-x-2">
+              <Link
+                to="/profile"
+                className={`relative p-1.5 transition duration-300 rounded-2xl ${
+                  theme === "dark"
+                    ? "hover:bg-gray-700"
+                    : "hover:bg-gray-300 text-gray-900"
+                }`}
+              >
+                <img
+                  src={user?.image}
+                  alt="profile"
+                  className="object-cover border border-gray-400 rounded-full w-7 h-7 sm:w-8 sm:h-8"
+                />
+              </Link>
+              <button
+                onClick={handleLogout}
+                className="px-2 py-1.5 text-xs sm:text-sm font-medium text-white bg-red-600 rounded-2xl hover:bg-red-700 transition"
+              >
+                Logout
+              </button>
+            </div>
+          ) : (
+            <Link
+              to="/login"
+              className={`p-1.5 transition duration-300 rounded-2xl ${
+                theme === "dark"
+                  ? "hover:bg-gray-700 text-white"
+                  : "hover:bg-gray-300 text-gray-900"
+              }`}
+            >
+              <FaUser />
+            </Link>
+          )}
         </div>
       </div>
     </nav>
