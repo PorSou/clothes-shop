@@ -7,7 +7,7 @@ const Footer = () => {
 
   return (
     <footer
-      className={`py-10 border-t mt-20 transition-colors duration-300 ${
+      className={`w-full py-10 border-t transition-colors duration-300 ${
         theme === "dark"
           ? "bg-gray-900 text-gray-300 border-gray-700"
           : "bg-[#f4f0ea] text-gray-700 border-gray-200"

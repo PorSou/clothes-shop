@@ -29,13 +29,13 @@ const Cart = () => {
 
   return (
     <div
-      className={`px-4 py-8 mb-20 transition-colors duration-300 ${
+      className={`relative -mt-10 transition-colors duration-300 ${
         theme === "dark"
           ? "bg-gray-900 text-gray-100"
           : "bg-stone-50 text-gray-900"
       }`}
     >
-      <div className="mx-auto max-w-7xl">
+      <div className="px-4 py-8 pb-40 mx-auto max-w-7xl">
         <h1 className="mb-8 text-4xl font-bold">Shopping Cart</h1>
 
         {cartItems.length === 0 ? (
@@ -49,7 +49,11 @@ const Cart = () => {
             <p className="mb-4 text-lg">Your cart is empty</p>
             <Link
               to="/shop"
-              className="inline-block px-6 py-3 text-white transition bg-gray-800 rounded-lg hover:bg-gray-700"
+              className={`inline-block px-6 py-3 text-gray-900 transition rounded-lg ${
+                theme === "dark"
+                  ? "bg-white hover:bg-gray-200"
+                  : "bg-gray-800 text-white hover:bg-gray-700"
+              }`}
             >
               Continue Shopping
             </Link>
@@ -133,15 +137,25 @@ const Cart = () => {
                   <span>${total.toFixed(2)}</span>
                 </div>
               </div>
+
               <button
                 onClick={handleCheckout}
-                className="w-full py-3 mb-3 font-semibold text-white transition bg-gray-800 rounded-lg hover:bg-gray-700"
+                className={`w-full py-3 mb-3 font-semibold rounded-lg cursor-pointer transition-colors ${
+                  theme === "dark"
+                    ? "bg-indigo-600 text-white hover:bg-indigo-500"
+                    : "bg-gray-800 text-white hover:bg-gray-700"
+                }`}
               >
                 Proceed to Checkout
               </button>
+
               <Link
                 to="/shop"
-                className="block p-2 font-medium text-center transition rounded-md hover:bg-gray-200 hover:text-gray-900"
+                className={`block p-2 font-medium text-center rounded-md transition-colors ${
+                  theme === "dark"
+                    ? "bg-gray-700 text-white hover:bg-gray-600"
+                    : "hover:bg-gray-200 hover:text-gray-900"
+                }`}
               >
                 Continue Shopping
               </Link>
@@ -149,6 +163,9 @@ const Cart = () => {
           </div>
         )}
       </div>
+
+      {/* Footer */}
+      {/* <Footer /> */}
     </div>
   );
 };

@@ -38,58 +38,63 @@ const AppContent = () => {
   }, [theme]);
 
   return (
-    // Default bg is white
     <div
-      className={`min-h-screen transition-colors duration-300 bg-white ${
+      className={`flex flex-col min-h-screen transition-colors duration-300 bg-white ${
         theme === "dark" ? "dark:bg-gray-900 dark:text-white" : "text-gray-900"
       }`}
     >
       <Navbar search={search} setSearch={setSearch} />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <>
-              <Home />
-              <Category />
-              <FeaturedProducts />
-              <JoinCommunity />
-              <MarqueeBar />
-            </>
-          }
-        />
-        <Route
-          path="/home"
-          element={
-            <>
-              <Home />
-              <Category />
-              <FeaturedProducts />
-              <JoinCommunity />
-              <MarqueeBar />
-            </>
-          }
-        />
-        <Route path="/home/:id" element={<ProductDetailForCard />} />
-        <Route path="/shop" element={<Shop search={search} />} />
-        <Route path="/shop/:id" element={<ProductDetail />} />
-        <Route path="/men" element={<Men />} />
-        <Route path="/women" element={<Women />} />
-        <Route path="/kids" element={<Kids />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/favorite" element={<Favorite />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route
-          path="/checkout"
-          element={
-            <ProtectedRoute>
-              <Checkout />
-            </ProtectedRoute>
-          }
-        />
-      </Routes>
+
+      {/* Main content grows to fill space */}
+      <main className="flex-1">
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <Home />
+                <Category />
+                <FeaturedProducts />
+                <JoinCommunity />
+                <MarqueeBar />
+              </>
+            }
+          />
+          <Route
+            path="/home"
+            element={
+              <>
+                <Home />
+                <Category />
+                <FeaturedProducts />
+                <JoinCommunity />
+                <MarqueeBar />
+              </>
+            }
+          />
+          <Route path="/home/:id" element={<ProductDetailForCard />} />
+          <Route path="/shop" element={<Shop search={search} />} />
+          <Route path="/shop/:id" element={<ProductDetail />} />
+          <Route path="/men" element={<Men />} />
+          <Route path="/women" element={<Women />} />
+          <Route path="/kids" element={<Kids />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/favorite" element={<Favorite />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route
+            path="/checkout"
+            element={
+              <ProtectedRoute>
+                <Checkout />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      </main>
+
+      {/* Footer always at bottom */}
       <Footer />
     </div>
   );
