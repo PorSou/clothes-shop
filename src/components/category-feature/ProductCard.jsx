@@ -21,7 +21,7 @@ const ProductCard = ({ product }) => {
 
   return (
     <div
-      className={`flex w-full transition-colors duration-300 ${
+      className={`flex w-full h-auto transition-colors duration-300 ${
         theme === "dark"
           ? "bg-gray-800 border border-gray-700"
           : "bg-white border border-gray-200"
@@ -46,12 +46,12 @@ const ProductCard = ({ product }) => {
 
       <button
         onClick={handleFavorite}
-        className="absolute flex items-center justify-center w-8 h-8 text-xl transition-colors bg-white rounded-full top-2 right-2 hover:bg-gray-300 dark:bg-gray-900 dark:hover:bg-gray-700"
+        className="absolute flex items-center justify-center w-8 h-8 text-xl transition-colors bg-white rounded-full top-2 right-2 hover:bg-gray-300 dark:bg-gray-200"
       >
         {isFav ? (
           <FaHeart className="text-red-500" />
         ) : (
-          <FaRegHeart className="text-gray-600 dark:text-gray-300" />
+          <FaRegHeart className="text-gray-600 dark:text-gray-600" />
         )}
       </button>
     </div>

@@ -36,6 +36,7 @@ const Shop = ({ search }) => {
         (p) => p.category.toLowerCase() === selectedCategory.toLowerCase()
       );
     }
+
     if (selectedColor !== "all") {
       filtered = filtered.filter(
         (p) => p.color.toLowerCase() === selectedColor.toLowerCase()
@@ -64,23 +65,13 @@ const Shop = ({ search }) => {
 
   return (
     <div
-      className={`min-h-screen px-4 py-10 sm:px-8 md:px-10 lg:px-80 transition-colors duration-300 ${
+      className={`min-h-screen px-4 lg:px-10 2xl:px-80 py-10 transition-colors duration-300  ${
         theme === "dark"
           ? "bg-gray-900 text-gray-100"
           : "bg-[#fdfaf6] text-gray-900"
       }`}
     >
-      <h1 className="mb-2 text-3xl font-bold">Shop Collection</h1>
-      <p
-        className={`mb-8 transition-colors duration-300 ${
-          theme === "dark" ? "text-gray-300" : "text-gray-500"
-        }`}
-      >
-        {filteredProducts.length} products in stock
-      </p>
-      <h2 className="text-xl text-red-600">Filters</h2>
-
-      {/* Mobile controls: shown below lg: */}
+      {/* Mobile controls */}
       <div className="flex items-center justify-between mb-4 lg:hidden">
         <button
           onClick={() => setIsFiltersOpen(!isFiltersOpen)}
@@ -100,34 +91,41 @@ const Shop = ({ search }) => {
       </div>
 
       {/* Main layout */}
-      <div
-        className="flex flex-col lg:flex-row lg:gap-14" // Correctly uses flex-row on lg: and stacks on mobile/tablet
-        ref={containerRef}
-      >
-        {/* Filters column */}
-        <div
-          className={`w-full lg:w-1/5 ${
-            // lg:w-1/5 applies only on desktop
-            isFiltersOpen ? "block mb-6" : "hidden"
-          } lg:block`}
-        >
-          <div className="lg:sticky lg:top-20">
-            <Filters
-              selectedCategory={selectedCategory}
-              onCategoryChange={setSelectedCategory}
-              selectedColor={selectedColor}
-              onColorChange={setSelectedColor}
-              priceRange={priceRange}
-              onPriceChange={setPriceRange}
-              theme={theme}
-            />
+      <div className="flex flex-col lg:flex-row lg:gap-8" ref={containerRef}>
+        <div className="flex flex-col">
+          <h1 className="mb-2 text-3xl font-bold">Shop Collection</h1>
+          <p
+            className={`mb-8 transition-colors duration-300 ${
+              theme === "dark" ? "text-gray-300" : "text-gray-500"
+            }`}
+          >
+            {filteredProducts.length} products in stock
+          </p>
+
+          {/* Filters column */}
+          <div
+            className={`w-full lg:w-1/5 ${
+              isFiltersOpen ? "block mb-6" : "hidden"
+            } lg:block`}
+          >
+            <div className="lg:sticky lg:top-20">
+              <Filters
+                selectedCategory={selectedCategory}
+                onCategoryChange={setSelectedCategory}
+                selectedColor={selectedColor}
+                onColorChange={setSelectedColor}
+                priceRange={priceRange}
+                onPriceChange={setPriceRange}
+                theme={theme}
+              />
+            </div>
           </div>
         </div>
 
         {/* Products column */}
-        <div className="flex flex-col flex-1 p-0 lg:p-4 lg:rounded-lg">
-          {/* Sort dropdown (desktop) - Shown above lg: */}
-          <div className="justify-end hidden mb-4 lg:flex">
+        <div className="flex flex-col flex-1 p-0 lg:p-4 lg:rounded-lg ">
+          {/* Sort dropdown (desktop) */}
+          <div className="justify-end hidden lg:flex">
             <SortDropdown
               sortOrder={sortOrder}
               onSortChange={setSortOrder}

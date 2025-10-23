@@ -32,28 +32,6 @@ export default function Home() {
         <div className="absolute inset-0 bg-black/40" />
       </div>
 
-      {/* 🪐 Floating top-right icon */}
-      <motion.div
-        className="absolute flex items-center justify-center text-white rounded-full shadow-xl top-8 right-8 bg-gradient-to-tr from-yellow-300 via-orange-400 to-pink-500"
-        style={{
-          width: 70,
-          height: 70,
-          fontSize: 32,
-        }}
-        animate={{
-          rotate: 360,
-          scale: [1, 1.15, 1],
-          y: [0, -10, 0],
-        }}
-        transition={{
-          repeat: Infinity,
-          duration: 6, // slower, smoother spin
-          ease: "easeInOut",
-        }}
-      >
-        ⭐
-      </motion.div>
-
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center justify-center w-full max-w-5xl px-6 py-12 text-center lg:items-start sm:px-12 lg:px-16 lg:text-left">
         {/* Title */}

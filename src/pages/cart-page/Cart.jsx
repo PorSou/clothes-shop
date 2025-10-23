@@ -1,8 +1,10 @@
+// src/pages/cart/Cart.jsx
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromCart, updateQuantity } from "../../features/cart/cartSlice";
 import { FaTrash, FaMinus, FaPlus } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
+import Footer from "../../components/Footer";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -21,6 +23,7 @@ const Cart = () => {
   const handleRemove = (id) => dispatch(removeFromCart(id));
   const handleQuantityChange = (id, type) =>
     dispatch(updateQuantity({ id, type }));
+
   const handleCheckout = () => {
     if (!token)
       navigate("/login", { state: { from: { pathname: "/checkout" } } });
@@ -29,7 +32,7 @@ const Cart = () => {
 
   return (
     <div
-      className={`relative -mt-10 transition-colors duration-300 ${
+      className={`min-h-screen transition-colors duration-300 ${
         theme === "dark"
           ? "bg-gray-900 text-gray-100"
           : "bg-stone-50 text-gray-900"
@@ -60,7 +63,8 @@ const Cart = () => {
           </div>
         ) : (
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
-            <div className="space-y-4 lg:col-span-2">
+            {/* Cart Items */}
+            <div className="pb-10 space-y-4 lg:col-span-2">
               {cartItems.map((item) => (
                 <div
                   key={item.id}
@@ -75,6 +79,7 @@ const Cart = () => {
                     alt={item.name}
                     className="object-cover w-24 h-24 rounded-lg"
                   />
+
                   <div className="flex-1">
                     <h3 className="text-lg font-semibold">{item.name}</h3>
                     <p className="text-sm text-gray-500">
@@ -115,57 +120,65 @@ const Cart = () => {
               ))}
             </div>
 
+            {/* Order Summary */}
             <div
-              className={`sticky p-6 rounded-lg shadow-sm transition-colors duration-300 top-24 ${
+              className={`sticky top-24 p-6 h-fit rounded-lg shadow-sm transition-colors duration-300 flex flex-col justify-between ${
                 theme === "dark"
                   ? "bg-gray-800 border border-gray-700"
                   : "bg-white border border-gray-200"
               }`}
             >
-              <h2 className="mb-6 text-2xl font-bold">Order Summary</h2>
-              <div className="mb-6 space-y-4">
-                <div className="flex justify-between text-gray-700">
-                  <span>Subtotal</span>
-                  <span className="font-semibold">${subtotal.toFixed(2)}</span>
-                </div>
-                <div className="flex justify-between text-gray-700">
-                  <span>Shipping</span>
-                  <span className="font-semibold">${shipping.toFixed(2)}</span>
-                </div>
-                <div className="flex justify-between pt-4 text-xl font-bold border-t">
-                  <span>Total</span>
-                  <span>${total.toFixed(2)}</span>
+              <div>
+                <h2 className="mb-6 text-2xl font-bold">Order Summary</h2>
+                <div className="mb-6 space-y-4">
+                  <div className="flex justify-between text-gray-700">
+                    <span>Subtotal</span>
+                    <span className="font-semibold">
+                      ${subtotal.toFixed(2)}
+                    </span>
+                  </div>
+                  <div className="flex justify-between text-gray-700">
+                    <span>Shipping</span>
+                    <span className="font-semibold">
+                      ${shipping.toFixed(2)}
+                    </span>
+                  </div>
+                  <div className="flex justify-between pt-4 text-xl font-bold border-t">
+                    <span>Total</span>
+                    <span>${total.toFixed(2)}</span>
+                  </div>
                 </div>
               </div>
 
-              <button
-                onClick={handleCheckout}
-                className={`w-full py-3 mb-3 font-semibold rounded-lg cursor-pointer transition-colors ${
-                  theme === "dark"
-                    ? "bg-indigo-600 text-white hover:bg-indigo-500"
-                    : "bg-gray-800 text-white hover:bg-gray-700"
-                }`}
-              >
-                Proceed to Checkout
-              </button>
+              <div className="mt-auto">
+                <button
+                  onClick={handleCheckout}
+                  className={`w-full py-3 mb-3 font-semibold rounded-lg cursor-pointer transition-colors ${
+                    theme === "dark"
+                      ? "bg-indigo-600 text-white hover:bg-indigo-500"
+                      : "bg-gray-800 text-white hover:bg-gray-700"
+                  }`}
+                >
+                  Proceed to Checkout
+                </button>
 
-              <Link
-                to="/shop"
-                className={`block p-2 font-medium text-center rounded-md transition-colors ${
-                  theme === "dark"
-                    ? "bg-gray-700 text-white hover:bg-gray-600"
-                    : "hover:bg-gray-200 hover:text-gray-900"
-                }`}
-              >
-                Continue Shopping
-              </Link>
+                <Link
+                  to="/shop"
+                  className={`block p-2 font-medium text-center rounded-md transition-colors ${
+                    theme === "dark"
+                      ? "bg-gray-700 text-white hover:bg-gray-600"
+                      : "hover:bg-gray-200 hover:text-gray-900"
+                  }`}
+                >
+                  Continue Shopping
+                </Link>
+              </div>
             </div>
           </div>
         )}
       </div>
 
-      {/* Footer */}
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 };

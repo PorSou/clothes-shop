@@ -75,9 +75,11 @@ const AppContent = () => {
           <Route path="/home/:id" element={<ProductDetailForCard />} />
           <Route path="/shop" element={<Shop search={search} />} />
           <Route path="/shop/:id" element={<ProductDetail />} />
-          <Route path="/men" element={<Men />} />
-          <Route path="/women" element={<Women />} />
-          <Route path="/kids" element={<Kids />} />
+
+          <Route path="/men" element={<Men search={search} />} />
+          <Route path="/women" element={<Women search={search} />} />
+          <Route path="/kids" element={<Kids search={search} />} />
+
           <Route path="/cart" element={<Cart />} />
           <Route path="/favorite" element={<Favorite />} />
           <Route path="/login" element={<Login />} />

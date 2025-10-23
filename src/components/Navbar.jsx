@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../features/auth/authSlice";
 import { clearCart } from "../features/cart/cartSlice";
@@ -19,9 +19,8 @@ const Navbar = ({ search, setSearch }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // Theme from Redux
+  // Redux data
   const theme = useSelector((state) => state.theme.mode);
-
   const cartQuantity = useSelector((state) => state.cart?.totalQuantity || 0);
   const favoriteCount = useSelector(
     (state) => state.favorite?.totalFavorites || 0
@@ -36,6 +35,17 @@ const Navbar = ({ search, setSearch }) => {
     navigate("/login");
   };
 
+  // Dynamic styles for active/inactive links
+  const linkBase =
+    theme === "dark"
+      ? "text-gray-300 hover:text-white transition duration-200"
+      : "text-gray-700 hover:text-gray-900 transition duration-200";
+
+  const activeLink =
+    theme === "dark"
+      ? "text-blue-400 font-semibold border-b-2 border-blue-400"
+      : "text-blue-600 font-semibold border-b-2 border-blue-600";
+
   return (
     <nav
       className={`sticky top-0 z-50 px-4 py-5 transition-colors duration-300 shadow-sm backdrop-blur-md ${
@@ -47,15 +57,15 @@ const Navbar = ({ search, setSearch }) => {
       <div className="flex items-center justify-between mx-auto max-w-7xl">
         {/* Logo */}
         <div className="flex items-center space-x-2">
-          <Link to="/">
+          <NavLink to="/">
             <img
               src="https://img.freepik.com/premium-vector/clothing-store-logo-design-inspiration-cloth-shop-logo-clothes-logo-vector-illustration_148524-764.jpg"
               alt="StyleHub Logo"
               className="object-cover w-10 h-10 rounded"
             />
-          </Link>
+          </NavLink>
           <span className="hidden text-lg font-bold sm:block">
-            <Link to="/">StyleHub</Link>
+            <NavLink to="/">StyleHub</NavLink>
           </span>
         </div>
 
@@ -76,11 +86,13 @@ const Navbar = ({ search, setSearch }) => {
           } ${menuOpen ? "block" : "hidden lg:flex"}`}
         >
           {["Shop", "Men", "Women", "Kids"].map((item) => (
-            <li
-              key={item}
-              className="transition-colors duration-300 cursor-pointer hover:opacity-80"
-            >
-              <Link to={`/${item.toLowerCase()}`}>{item}</Link>
+            <li key={item}>
+              <NavLink
+                to={`/${item.toLowerCase()}`}
+                className={({ isActive }) => (isActive ? activeLink : linkBase)}
+              >
+                {item}
+              </NavLink>
             </li>
           ))}
         </ul>
@@ -119,13 +131,11 @@ const Navbar = ({ search, setSearch }) => {
           </div>
 
           {/* Favorite */}
-          <Link
+          <NavLink
             to="/favorite"
-            className={`relative p-1.5 transition duration-300 rounded-2xl ${
-              theme === "dark"
-                ? "hover:bg-gray-700 text-white"
-                : "hover:bg-gray-300 text-gray-900"
-            }`}
+            className={({ isActive }) =>
+              `relative p-1.5 rounded-2xl ${isActive ? activeLink : linkBase}`
+            }
           >
             <FaHeart />
             {favoriteCount > 0 && (
@@ -133,16 +143,14 @@ const Navbar = ({ search, setSearch }) => {
                 {favoriteCount}
               </span>
             )}
-          </Link>
+          </NavLink>
 
           {/* Cart */}
-          <Link
+          <NavLink
             to="/cart"
-            className={`relative p-1.5 transition duration-300 rounded-2xl ${
-              theme === "dark"
-                ? "hover:bg-gray-700 text-white"
-                : "hover:bg-gray-300 text-gray-900"
-            }`}
+            className={({ isActive }) =>
+              `relative p-1.5 rounded-2xl ${isActive ? activeLink : linkBase}`
+            }
           >
             <FaShoppingCart />
             {cartQuantity > 0 && (
@@ -150,25 +158,25 @@ const Navbar = ({ search, setSearch }) => {
                 {cartQuantity}
               </span>
             )}
-          </Link>
+          </NavLink>
 
           {/* Profile/Login */}
           {isAuthenticated ? (
-            <div className="flex items-center space-x-2">
-              <Link
+            <div className="flex items-center space-x-2 mr-7">
+              <NavLink
                 to="/profile"
-                className={`relative p-1.5 transition duration-300 rounded-2xl ${
-                  theme === "dark"
-                    ? "hover:bg-gray-700"
-                    : "hover:bg-gray-300 text-gray-900"
-                }`}
+                className={({ isActive }) =>
+                  `relative p-1.5 rounded-2xl ${
+                    isActive ? activeLink : linkBase
+                  }`
+                }
               >
                 <img
                   src={user?.image}
                   alt="profile"
                   className="object-cover border border-gray-400 rounded-full w-7 h-7 sm:w-8 sm:h-8"
                 />
-              </Link>
+              </NavLink>
               <button
                 onClick={handleLogout}
                 className="px-2 py-1.5 text-xs sm:text-sm font-medium text-white bg-red-600 rounded-2xl hover:bg-red-700 transition"
@@ -177,16 +185,14 @@ const Navbar = ({ search, setSearch }) => {
               </button>
             </div>
           ) : (
-            <Link
+            <NavLink
               to="/login"
-              className={`p-1.5 transition duration-300 rounded-2xl ${
-                theme === "dark"
-                  ? "hover:bg-gray-700 text-white"
-                  : "hover:bg-gray-300 text-gray-900"
-              }`}
+              className={({ isActive }) =>
+                `p-1.5 rounded-2xl ${isActive ? activeLink : linkBase}`
+              }
             >
               <FaUser />
-            </Link>
+            </NavLink>
           )}
         </div>
       </div>

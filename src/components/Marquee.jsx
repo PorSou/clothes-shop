@@ -51,7 +51,7 @@ const MarqueeBar = () => {
       </style>
 
       <div
-        className={`relative flex py-3 mt-10 overflow-hidden border-y marquee-container ${
+        className={`relative flex py-3 mb-20 mt-10 overflow-hidden border-y marquee-container ${
           theme === "dark"
             ? "bg-gray-800 border-gray-700"
             : "bg-gray-50 border-gray-200"
