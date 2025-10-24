@@ -19,7 +19,6 @@ const Navbar = ({ search, setSearch }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // Redux data
   const theme = useSelector((state) => state.theme.mode);
   const cartQuantity = useSelector((state) => state.cart?.totalQuantity || 0);
   const favoriteCount = useSelector(
@@ -35,7 +34,6 @@ const Navbar = ({ search, setSearch }) => {
     navigate("/login");
   };
 
-  // Dynamic styles for active/inactive links
   const linkBase =
     theme === "dark"
       ? "text-gray-300 hover:text-white transition duration-200"
@@ -95,6 +93,29 @@ const Navbar = ({ search, setSearch }) => {
               </NavLink>
             </li>
           ))}
+
+          {/* Mobile login/logout button */}
+          <li className="mt-4 lg:hidden">
+            {isAuthenticated ? (
+              <div>
+                <button
+                  onClick={handleLogout}
+                  className="px-2 py-1.5 text-xs sm:text-sm font-medium text-white bg-red-600 rounded-2xl hover:bg-red-700 transition"
+                >
+                  Logout
+                </button>
+              </div>
+            ) : (
+              <NavLink
+                to="/login"
+                className={({ isActive }) =>
+                  `p-1.5 rounded-2xl ${isActive ? activeLink : linkBase}`
+                }
+              >
+                <FaUser />
+              </NavLink>
+            )}
+          </li>
         </ul>
 
         {/* Search Bar */}
@@ -113,7 +134,12 @@ const Navbar = ({ search, setSearch }) => {
         </div>
 
         {/* Icons */}
-        <div className="flex items-center space-x-4 text-lg">
+        <div
+          className={`flex items-center space-x-5 text-lg lg:space-x-8 transition-all duration-300 
+          ${
+            isAuthenticated ? "pl-4 lg:pl-0" : "pl-10 pr-10 lg:pl-0 lg:pr-0" // 👈 Push icons left on mobile when not logged in
+          }`}
+        >
           {/* Theme Toggle */}
           <div
             onClick={() => dispatch(toggleTheme())}
@@ -162,7 +188,7 @@ const Navbar = ({ search, setSearch }) => {
 
           {/* Profile/Login */}
           {isAuthenticated ? (
-            <div className="flex items-center space-x-2 mr-7">
+            <>
               <NavLink
                 to="/profile"
                 className={({ isActive }) =>
@@ -177,13 +203,17 @@ const Navbar = ({ search, setSearch }) => {
                   className="object-cover border border-gray-400 rounded-full w-7 h-7 sm:w-8 sm:h-8"
                 />
               </NavLink>
-              <button
-                onClick={handleLogout}
-                className="px-2 py-1.5 text-xs sm:text-sm font-medium text-white bg-red-600 rounded-2xl hover:bg-red-700 transition"
-              >
-                Logout
-              </button>
-            </div>
+
+              {/* Logout button for desktop */}
+              <li className="hidden lg:block">
+                <button
+                  onClick={handleLogout}
+                  className="px-2 py-1.5 text-xs sm:text-sm font-medium text-white bg-red-600 rounded-2xl hover:bg-red-700 transition"
+                >
+                  Logout
+                </button>
+              </li>
+            </>
           ) : (
             <NavLink
               to="/login"

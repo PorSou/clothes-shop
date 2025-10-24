@@ -1,4 +1,3 @@
-// src/pages/cart/Cart.jsx
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromCart, updateQuantity } from "../../features/cart/cartSlice";
@@ -32,13 +31,14 @@ const Cart = () => {
 
   return (
     <div
-      className={`min-h-screen transition-colors duration-300 ${
+      className={`flex flex-col min-h-screen transition-colors duration-300 ${
         theme === "dark"
           ? "bg-gray-900 text-gray-100"
           : "bg-stone-50 text-gray-900"
       }`}
     >
-      <div className="px-4 py-8 pb-40 mx-auto max-w-7xl">
+      {/* Scrollable content */}
+      <div className="flex-1 w-full px-4 py-8 mx-auto overflow-y-auto sm:max-w-7xl sm:px-6 lg:px-8">
         <h1 className="mb-8 text-4xl font-bold">Shopping Cart</h1>
 
         {cartItems.length === 0 ? (
@@ -64,7 +64,7 @@ const Cart = () => {
         ) : (
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
             {/* Cart Items */}
-            <div className="pb-10 space-y-4 lg:col-span-2">
+            <div className="space-y-4 lg:col-span-2">
               {cartItems.map((item) => (
                 <div
                   key={item.id}
@@ -122,7 +122,7 @@ const Cart = () => {
 
             {/* Order Summary */}
             <div
-              className={`sticky top-24 p-6 h-fit rounded-lg shadow-sm transition-colors duration-300 flex flex-col justify-between ${
+              className={`p-6 h-fit rounded-lg shadow-sm transition-colors duration-300 flex flex-col justify-between ${
                 theme === "dark"
                   ? "bg-gray-800 border border-gray-700"
                   : "bg-white border border-gray-200"
@@ -178,6 +178,7 @@ const Cart = () => {
         )}
       </div>
 
+      {/* Footer */}
       <Footer />
     </div>
   );

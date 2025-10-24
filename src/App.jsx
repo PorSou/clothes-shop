@@ -12,7 +12,7 @@ import Kids from "./pages/kids-page/Kids";
 import Category from "./pages/category-page/Category";
 import FeaturedProducts from "./pages/feature-page/Feature";
 import JoinCommunity from "./components/JoinCommunity";
-import Footer from "./components/Footer";
+import Footer from "./components/Footer"; // Global Footer Component
 import ProductDetail from "./components/card-detail-feature/ProductDetail";
 import ProductDetailForCard from "./pages/feature-page/ProductDetailForCard";
 import MarqueeBar from "./components/Marquee";
@@ -30,7 +30,7 @@ const AppContent = () => {
   const [search, setSearch] = useState("");
   const theme = useSelector((state) => state.theme.mode);
 
-  // Apply dark class on html root when theme === dark
+  // Apply dark class on HTML root when theme === dark
   useEffect(() => {
     const root = window.document.documentElement;
     if (theme === "dark") root.classList.add("dark");
@@ -39,8 +39,8 @@ const AppContent = () => {
 
   return (
     <div
-      className={`flex flex-col min-h-screen transition-colors duration-300 bg-white ${
-        theme === "dark" ? "dark:bg-gray-900 dark:text-white" : "text-gray-900"
+      className={`flex flex-col min-h-screen transition-colors duration-300 ${
+        theme === "dark" ? "bg-gray-900 text-white" : "bg-white text-gray-900"
       }`}
     >
       <Navbar search={search} setSearch={setSearch} />

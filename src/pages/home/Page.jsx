@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 
 export default function Home() {
   const images = [
-    "https://images.pexels.com/photos/603022/pexels-photo-603022.jpeg",
     "https://m.foolcdn.com/media/dubs/original_images/clothing_hanging_on_a_rack_in_a_store_fashion_retail_apparel_clothes.jpg",
     "https://millstonenews.com/wp-content/uploads/2023/06/Jeans.jpg",
     "https://c8.alamy.com/comp/P9DJB5/woman-clothes-set-casual-jeans-shirt-t-shirt-on-stone-background-fashion-beauty-background-top-view-copy-space-P9DJB5.jpg",

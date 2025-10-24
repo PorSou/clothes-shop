@@ -1,11 +1,10 @@
-// src/pages/login-page/Login.jsx
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginSuccess } from "../../../features/auth/authSlice";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 
 const Login = () => {
-  const theme = useSelector((state) => state.theme.mode); // ✅ get theme
+  const theme = useSelector((state) => state.theme.mode);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -42,12 +41,12 @@ const Login = () => {
 
   return (
     <div
-      className={`flex items-center justify-center mb-35 mt-15 min-h-screen ${
+      className={`flex flex-col mt-20 transition-colors duration-300 ${
         theme === "dark" ? "bg-gray-900 text-white" : "bg-white text-gray-900"
       }`}
     >
       <div
-        className={`w-full max-w-md p-8 text-center rounded-2xl ${
+        className={`w-full max-w-md p-8 text-center rounded-2xl mx-auto ${
           theme === "dark" ? "bg-gray-800" : "bg-white"
         }`}
       >
@@ -144,6 +143,7 @@ const Login = () => {
           </p>
         </div>
       </div>
+     
     </div>
   );
 };
