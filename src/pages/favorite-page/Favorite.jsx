@@ -121,11 +121,6 @@ const Favorite = () => {
         <div className="fixed bottom-0 left-0 z-50 hidden w-full md:block">
           <Footer />
         </div>
-
-        {/* Normal footer for mobile */}
-        <div className="block md:hidden">
-          <Footer />
-        </div>
       </div>
     </div>
   );

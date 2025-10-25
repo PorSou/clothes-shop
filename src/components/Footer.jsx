@@ -11,15 +11,15 @@ const Footer = () => {
   const borderTopClass =
     theme === "dark" ? "border-t-gray-700" : "border-t-gray-300";
 
-  // Make sticky only on /cart page
+  // ✅ Sticky only on /cart for md and larger screens
   const stickyClass =
     location.pathname === "/cart"
-      ? "fixed bottom-0 left-0 w-full z-50"
+      ? "relative md:fixed md:bottom-0 md:left-0 md:w-full md:z-50"
       : "";
 
   return (
     <footer
-      className={`py-10 transition-colors duration-300 ${bgClass} ${textClass} border-t ${borderTopClass} ${stickyClass}`}
+      className={`py-10 transition-colors duration-300 border-t ${bgClass} ${textClass} ${borderTopClass} ${stickyClass}`}
     >
       <div className="flex flex-col items-center px-6 mx-auto max-w-7xl md:px-16">
         <div className="grid grid-cols-1 gap-10 mb-8 md:grid-cols-4">
@@ -42,27 +42,63 @@ const Footer = () => {
           <div>
             <h3 className="mb-3 font-semibold">Shop</h3>
             <ul className="space-y-2 text-sm">
-              <li><Link to="/men" className="hover:underline">Men</Link></li>
-              <li><Link to="/women" className="hover:underline">Women</Link></li>
-              <li><Link to="/kids" className="hover:underline">Kids</Link></li>
+              <li>
+                <Link to="/men" className="hover:underline">
+                  Men
+                </Link>
+              </li>
+              <li>
+                <Link to="/women" className="hover:underline">
+                  Women
+                </Link>
+              </li>
+              <li>
+                <Link to="/kids" className="hover:underline">
+                  Kids
+                </Link>
+              </li>
             </ul>
           </div>
 
           <div>
             <h3 className="mb-3 font-semibold">Customer Service</h3>
             <ul className="space-y-2 text-sm">
-              <li><Link to="/contact" className="hover:underline">Contact Us</Link></li>
-              <li><Link to="/shipping" className="hover:underline">Shipping Info</Link></li>
-              <li><Link to="/returns" className="hover:underline">Returns</Link></li>
+              <li>
+                <Link to="/contact" className="hover:underline">
+                  Contact Us
+                </Link>
+              </li>
+              <li>
+                <Link to="/shipping" className="hover:underline">
+                  Shipping Info
+                </Link>
+              </li>
+              <li>
+                <Link to="/returns" className="hover:underline">
+                  Returns
+                </Link>
+              </li>
             </ul>
           </div>
 
           <div>
             <h3 className="mb-3 font-semibold">Company</h3>
             <ul className="space-y-2 text-sm">
-              <li><Link to="/about" className="hover:underline">About Us</Link></li>
-              <li><Link to="/careers" className="hover:underline">Careers</Link></li>
-              <li><Link to="/privacy" className="hover:underline">Privacy Policy</Link></li>
+              <li>
+                <Link to="/about" className="hover:underline">
+                  About Us
+                </Link>
+              </li>
+              <li>
+                <Link to="/careers" className="hover:underline">
+                  Careers
+                </Link>
+              </li>
+              <li>
+                <Link to="/privacy" className="hover:underline">
+                  Privacy Policy
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
