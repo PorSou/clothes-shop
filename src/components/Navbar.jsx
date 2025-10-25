@@ -77,7 +77,7 @@ const Navbar = ({ search, setSearch }) => {
 
         {/* Menu */}
         <ul
-          className={`flex flex-col lg:flex-row lg:space-x-6 absolute lg:static w-full lg:w-auto left-0 top-16 lg:top-auto p-4 lg:p-0 transition-all duration-300 ease-in-out ${
+          className={`flex flex-col lg:ml-10 lg:flex-row lg:space-x-6 absolute lg:static w-full lg:w-auto left-0 top-16 lg:top-auto p-4 lg:p-0 transition-all duration-300 ease-in-out ${
             theme === "dark"
               ? "bg-gray-900/90 text-gray-100"
               : "bg-gray-100/90 text-gray-900"

@@ -4,12 +4,12 @@ import { motion } from "framer-motion";
 
 export default function Home() {
   const images = [
-    "https://m.foolcdn.com/media/dubs/original_images/clothing_hanging_on_a_rack_in_a_store_fashion_retail_apparel_clothes.jpg",
-    "https://millstonenews.com/wp-content/uploads/2023/06/Jeans.jpg",
-    "https://c8.alamy.com/comp/P9DJB5/woman-clothes-set-casual-jeans-shirt-t-shirt-on-stone-background-fashion-beauty-background-top-view-copy-space-P9DJB5.jpg",
-    "https://makersrow.com/wp-content/uploads/2025/04/fast-fashion-vs-slow-sustainable-fashion-1024x683.webp",
-    "https://www.efulfillmentservice.com/wp-content/uploads/2023/12/Apparel.jpg",
-    "https://www.orfonline.org/public/uploads/posts/image/img-fashion-apparel.jpg",
+    "https://i.pinimg.com/1200x/10/96/49/1096493f27a9c9c5f48179fd587a21ee.jpg",
+    "https://i.pinimg.com/1200x/50/a3/91/50a391fe3814679a70f2aebcad23e0a4.jpg",
+    "https://i.pinimg.com/1200x/d3/ca/42/d3ca421da1c213e90891f00c75a5c8db.jpg",
+    "https://i.pinimg.com/1200x/0c/2a/74/0c2a742394261f39665d0dab43e9d13e.jpg",
+    "https://i.pinimg.com/1200x/a5/f9/ac/a5f9ac670b9d812ff8149aa31e4922d2.jpg",
+    "https://i.pinimg.com/1200x/85/80/a4/8580a4878b0eb13f2bfcd46fccb74e29.jpg",
   ];
 
   const [currentImage, setCurrentImage] = useState(0);
@@ -41,7 +41,7 @@ export default function Home() {
           className="mb-4 font-extrabold leading-tight text-white"
           style={{ fontSize: "clamp(2rem, 5vw, 4rem)" }}
         >
-          Discover Your Style
+          Where Style Meets You — Cloth Shop
         </motion.h1>
 
         {/* Paragraph */}
