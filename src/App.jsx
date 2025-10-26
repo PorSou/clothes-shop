@@ -25,6 +25,12 @@ import Checkout from "./pages/checkout-page/Checkout";
 import Register from "./pages/auth/register/Register";
 import Login from "./pages/auth/login-page/Login";
 import Home from "./pages/home/Page";
+import AboutUsPage from "./pages/about-us/AboutUsPage";
+import ContactUsPage from "./pages/contact-us/ContactUsPage";
+import ShippingInfoPage from "./pages/shipping/ShippingInfoPage";
+import ReturnsPage from "./pages/returns/ReturnsPage";
+import CareersPage from "./pages/careers/CareersPage";
+import PrivacyPolicyPage from "./pages/privacy-policy/PrivacyPolicyPage";
 
 const AppContent = () => {
   const [search, setSearch] = useState("");
@@ -85,6 +91,13 @@ const AppContent = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/about-us" element={<AboutUsPage />} />
+          <Route path="/contact-us" element={<ContactUsPage />} />
+          <Route path="/shipping" element={<ShippingInfoPage />} />
+          <Route path="/returns" element={<ReturnsPage />} />
+          <Route path="/careers" element={<CareersPage />} />
+          <Route path="/privacy" element={<PrivacyPolicyPage />} />
+
           <Route
             path="/checkout"
             element={

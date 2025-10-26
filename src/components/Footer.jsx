@@ -64,7 +64,7 @@ const Footer = () => {
             <h3 className="mb-3 font-semibold">Customer Service</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link to="/contact" className="hover:underline">
+                <Link to="/contact-us" className="hover:underline">
                   Contact Us
                 </Link>
               </li>
@@ -85,7 +85,7 @@ const Footer = () => {
             <h3 className="mb-3 font-semibold">Company</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link to="/about" className="hover:underline">
+                <Link to="/about-us" className="hover:underline">
                   About Us
                 </Link>
               </li>
