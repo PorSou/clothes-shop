@@ -13,14 +13,39 @@ export default function Home() {
   ];
 
   const [currentImage, setCurrentImage] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImage((prev) => (prev + 1) % images.length);
-    }, 2500);
-    return () => clearInterval(interval);
+    // Simulate loading time (2s)
+    const timeout = setTimeout(() => setLoading(false), 2000);
+    return () => clearTimeout(timeout);
   }, []);
 
+  useEffect(() => {
+    if (!loading) {
+      const interval = setInterval(() => {
+        setCurrentImage((prev) => (prev + 1) % images.length);
+      }, 2500);
+      return () => clearInterval(interval);
+    }
+  }, [loading]);
+
+  // 🦴 Skeleton while loading
+  if (loading) {
+    return (
+      <div className="relative w-full min-h-[500px] md:min-h-[600px] lg:min-h-[700px] flex items-center justify-center bg-gray-200 animate-pulse">
+        <div className="absolute inset-0 bg-gray-300" />
+        <div className="relative z-10 flex flex-col items-center justify-center w-full max-w-5xl px-6 py-12 text-center lg:items-start sm:px-12 lg:px-16 lg:text-left">
+          <div className="w-3/4 h-12 mb-4 bg-gray-400 rounded"></div>
+          <div className="w-1/2 h-5 mb-3 bg-gray-400 rounded"></div>
+          <div className="w-2/3 h-5 mb-6 bg-gray-400 rounded"></div>
+          <div className="w-32 h-10 bg-gray-400 rounded"></div>
+        </div>
+      </div>
+    );
+  }
+
+  // 🌟 Actual Hero Section
   return (
     <div className="relative w-full min-h-[500px] md:min-h-[600px] lg:min-h-[700px] flex items-center justify-center overflow-hidden">
       {/* Background Image */}
@@ -38,7 +63,7 @@ export default function Home() {
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut" }}
-          className="mb-4 font-extrabold leading-tight text-white"
+          className="mb-4 font-extrabold leading-tight text-white animate-pulse"
           style={{ fontSize: "clamp(2rem, 5vw, 4rem)" }}
         >
           Where Style Meets You — Cloth Shop

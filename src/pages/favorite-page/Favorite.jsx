@@ -4,6 +4,7 @@ import {
   removeFromFavorite,
   clearFavorites,
 } from "../../features/favorite/favoriteSlice";
+import { addToCart } from "../../features/cart/cartSlice";
 import { Link } from "react-router-dom";
 import Footer from "../../components/Footer";
 
@@ -25,7 +26,7 @@ const Favorite = () => {
         className="px-6 py-12 mx-auto overflow-y-auto max-w-7xl"
         style={{ paddingBottom: "6rem", maxHeight: "calc(100vh - 6rem)" }}
       >
-        {/* Header (no sticky) */}
+        {/* Header */}
         <div className="flex items-center justify-between mb-6 bg-inherit">
           <h1 className="text-3xl font-bold">
             {items.length > 0
@@ -81,7 +82,7 @@ const Favorite = () => {
                     className="object-cover w-full h-64 rounded-md"
                   />
                 </Link>
-                <div className="flex flex-col items-start justify-between flex-1">
+                <div className="flex flex-col items-start justify-between flex-1 w-full">
                   <Link to={`/product/${item.id}`}>
                     <h3 className="text-lg font-semibold">{item.name}</h3>
                     <p
@@ -92,16 +93,31 @@ const Favorite = () => {
                       ${item.price.toFixed(2)}
                     </p>
                   </Link>
-                  <button
-                    onClick={() => dispatch(removeFromFavorite(item.id))}
-                    className={`px-4 py-2 mt-3 text-sm text-white transition rounded ${
-                      theme === "dark"
-                        ? "bg-red-600 hover:bg-red-500"
-                        : "bg-red-600 hover:bg-red-500"
-                    }`}
-                  >
-                    Remove
-                  </button>
+
+                  {/* Buttons side by side */}
+                  <div className="flex flex-row items-center justify-start w-full gap-3 mt-4">
+                    <button
+                      onClick={() => dispatch(removeFromFavorite(item.id))}
+                      className={`flex-1 px-4 py-2 text-sm text-white transition rounded ${
+                        theme === "dark"
+                          ? "bg-red-600 hover:bg-red-500"
+                          : "bg-red-600 hover:bg-red-500"
+                      }`}
+                    >
+                      Remove
+                    </button>
+
+                    <button
+                      onClick={() => dispatch(addToCart(item))}
+                      className={`flex-1 px-4 py-2 text-sm text-white transition rounded ${
+                        theme === "dark"
+                          ? "bg-gray-600 hover:bg-gray-500"
+                          : "bg-gray-900 hover:bg-gray-800"
+                      }`}
+                    >
+                      Add to Cart
+                    </button>
+                  </div>
                 </div>
               </div>
             ))}
@@ -109,7 +125,7 @@ const Favorite = () => {
         )}
       </div>
 
-      {/* Footer responsive sticky/fixed */}
+      {/* Footer (non-fixed for mobile, fixed for desktop) */}
       <div
         className={`w-full ${
           theme === "dark"
@@ -117,8 +133,13 @@ const Favorite = () => {
             : "bg-stone-50 text-gray-900"
         }`}
       >
-        {/* Fixed footer for tablet & desktop */}
+        {/* Fixed footer only for desktop */}
         <div className="fixed bottom-0 left-0 z-50 hidden w-full md:block">
+          <Footer />
+        </div>
+
+        {/* Normal footer for mobile */}
+        <div className="block md:hidden">
           <Footer />
         </div>
       </div>

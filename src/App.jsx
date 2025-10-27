@@ -31,6 +31,8 @@ import ShippingInfoPage from "./pages/shipping/ShippingInfoPage";
 import ReturnsPage from "./pages/returns/ReturnsPage";
 import CareersPage from "./pages/careers/CareersPage";
 import PrivacyPolicyPage from "./pages/privacy-policy/PrivacyPolicyPage";
+import AddMore from "./pages/addmore/AddMore";
+import AddMoreV2 from "./pages/addmore/AddMoreV2";
 
 const AppContent = () => {
   const [search, setSearch] = useState("");
@@ -60,6 +62,8 @@ const AppContent = () => {
               <>
                 <Home />
                 <Category />
+                <AddMore />
+                <AddMoreV2 />
                 <FeaturedProducts />
                 <JoinCommunity />
                 <MarqueeBar />
@@ -72,6 +76,8 @@ const AppContent = () => {
               <>
                 <Home />
                 <Category />
+                <AddMore />
+                <AddMoreV2 />
                 <FeaturedProducts />
                 <JoinCommunity />
                 <MarqueeBar />

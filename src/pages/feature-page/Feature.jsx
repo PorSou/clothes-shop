@@ -1,11 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { products } from "../../Data";
 import ProductCard from "../../components/FeatureCard";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import AOS from "aos"; // Import AOS for animation
+import "aos/dist/aos.css"; // Import AOS styles
 
 const FeaturedProducts = () => {
   const theme = useSelector((state) => state.theme.mode);
+
+  // Initialize AOS
+  useEffect(() => {
+    AOS.init({
+      duration: 1000, // Animation duration
+      once: true, // Animations will run only once when scrolling into view
+    });
+  }, []);
 
   return (
     <div
@@ -36,8 +46,15 @@ const FeaturedProducts = () => {
       </div>
 
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-items-center">
-        {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
+        {products.map((product, idx) => (
+          <div
+            key={product.id}
+            data-aos="fade-right" // Apply fade-right animation
+            data-aos-delay={idx * 200} // Stagger animation delay
+            data-aos-offset="200" // Trigger animation when the element is 200px into the viewport
+          >
+            <ProductCard key={product.id} product={product} />
+          </div>
         ))}
       </div>
     </div>

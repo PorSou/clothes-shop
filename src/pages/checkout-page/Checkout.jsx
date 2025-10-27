@@ -52,14 +52,14 @@ const Checkout = () => {
 
   return (
     <div
-      className={`relative min-h-screen transition-colors duration-300 ${
+      className={`min-h-screen flex flex-col transition-colors duration-300 ${
         theme === "dark"
           ? "bg-gray-900 text-gray-100"
           : "bg-stone-50 text-gray-900"
       }`}
     >
-      {/* Main scrollable content */}
-      <div className="px-6 py-10 pb-40 overflow-y-auto">
+      {/* Main Content */}
+      <main className="flex-1 px-6 py-10">
         <div className="mx-auto max-w-7xl">
           <h1 className="mb-10 text-3xl font-bold">Checkout</h1>
 
@@ -76,7 +76,6 @@ const Checkout = () => {
                 Shipping Information
               </h2>
               <form onSubmit={handleSubmit} className="space-y-6">
-                {/* Keep all shipping fields as you sent */}
                 <div>
                   <label className="block mb-1 text-sm font-medium">
                     Full Name *
@@ -193,7 +192,7 @@ const Checkout = () => {
 
             {/* Order Summary */}
             <div
-              className={`p-6 border rounded-lg shadow-sm flex flex-col justify-between max-h-[80vh] overflow-y-auto scrollbar-hide transition-colors duration-300 ${
+              className={`p-6 border rounded-lg shadow-sm flex flex-col justify-between transition-colors duration-300 ${
                 theme === "dark"
                   ? "bg-gray-800 border-gray-700"
                   : "bg-white border-gray-200"
@@ -204,7 +203,7 @@ const Checkout = () => {
               {items.length === 0 ? (
                 <p className="text-gray-500">Your cart is empty.</p>
               ) : (
-                <div className="space-y-4">
+                <div className="space-y-4 max-h-[60vh] overflow-y-auto scrollbar-hide">
                   {items.map((item) => (
                     <div
                       key={item.id}
@@ -261,12 +260,10 @@ const Checkout = () => {
             </div>
           </div>
         </div>
-      </div>
+      </main>
 
-      {/* Footer fixed at bottom */}
-      <div className="fixed bottom-0 left-0 w-full">
-        <Footer />
-      </div>
+      {/* Footer scrolls normally (mobile-friendly) */}
+      <Footer />
     </div>
   );
 };

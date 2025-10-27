@@ -6,6 +6,7 @@ export const categories = [
     link: "/men",
     image:
       "https://i.pinimg.com/736x/c1/bb/bb/c1bbbb28ddbad94e5f4808c23a1019be.jpg",
+    description: "Discover timeless styles for the modern gentleman",
   },
   {
     id: 2,
@@ -13,6 +14,7 @@ export const categories = [
     link: "/kids",
     image:
       "https://i.pinimg.com/1200x/bd/cb/82/bdcb8293597f28fbeb5ee1529428c510.jpg",
+    description: "Comfortable and playful designs for little ones",
   },
   {
     id: 3,
@@ -20,6 +22,7 @@ export const categories = [
     link: "/women",
     image:
       "https://i.pinimg.com/736x/51/12/3d/51123d0af1821d6df2c4a64d2ff453a3.jpg",
+    description: "Elegant pieces for every occasion and style",
   },
 ];
 
@@ -49,7 +52,7 @@ export const products = [
     category: "Women",
     price: 89.99,
     image:
-      "https://i.pinimg.com/736x/25/ad/58/25ad58a43eefcdd1513d712e56772bc4.jpg",
+      "https://i.pinimg.com/1200x/6b/77/ab/6b77abb8ed052e9446c612ba3c88f0a9.jpg",
     isFavorite: false,
   },
   {
@@ -58,7 +61,7 @@ export const products = [
     category: "Men",
     price: 199.99,
     image:
-      "https://i.pinimg.com/1200x/14/1f/52/141f520455f7d1a260b5b1c2ac47b61f.jpg",
+      "https://i.pinimg.com/1200x/32/3d/1b/323d1b23033fb1674b41b8aebf2e7cf9.jpg",
     isFavorite: false,
   },
 ];
