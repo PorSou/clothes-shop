@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginSuccess } from "../../../features/auth/authSlice";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const theme = useSelector((state) => state.theme.mode);
@@ -11,9 +11,6 @@ const Login = () => {
   const [error, setError] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
-
-  const from = location.state?.from?.pathname || "/profile";
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -22,19 +19,26 @@ const Login = () => {
 
     setTimeout(() => {
       setLoading(false);
-      if (email === "demo@demo.com" && password === "demo123") {
+
+      const storedUser = JSON.parse(localStorage.getItem("registeredUser"));
+      if (!storedUser) {
+        setError("No account found. Please register first.");
+        return;
+      }
+
+      if (storedUser.email === email && storedUser.password === password) {
         const fakeUser = {
-          name: "Demo User",
-          email,
+          name: storedUser.name,
+          email: storedUser.email,
           image:
             "https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=500&q=80",
         };
         const fakeToken = "fake-jwt-token";
-
         dispatch(loginSuccess({ user: fakeUser, token: fakeToken }));
-        navigate(from, { replace: true });
+
+        navigate("/", { replace: true }); // go to home
       } else {
-        setError("Invalid credentials. Try demo@demo.com / demo123");
+        setError("Incorrect email or password. Please try again.");
       }
     }, 900);
   };
@@ -119,7 +123,7 @@ const Login = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-2 mt-2 text-white transition duration-200 bg-gray-600 rounded-lg hover:bg-gray-700 disabled:opacity-60"
+            className="w-full py-2 mt-2 text-white transition duration-200 bg-gray-600 rounded-lg cursor-pointer hover:bg-gray-700 disabled:opacity-60"
           >
             {loading ? "Signing in..." : "Sign In"}
           </button>
@@ -143,7 +147,6 @@ const Login = () => {
           </p>
         </div>
       </div>
-     
     </div>
   );
 };

@@ -33,6 +33,7 @@ import CareersPage from "./pages/careers/CareersPage";
 import PrivacyPolicyPage from "./pages/privacy-policy/PrivacyPolicyPage";
 import AddMore from "./pages/addmore/AddMore";
 import AddMoreV2 from "./pages/addmore/AddMoreV2";
+import AddMoreV3 from "./pages/addmore/AddMoreV3";
 
 const AppContent = () => {
   const [search, setSearch] = useState("");
@@ -66,6 +67,7 @@ const AppContent = () => {
                 <AddMoreV2 />
                 <FeaturedProducts />
                 <JoinCommunity />
+                <AddMoreV3/>
                 <MarqueeBar />
               </>
             }
@@ -80,6 +82,7 @@ const AppContent = () => {
                 <AddMoreV2 />
                 <FeaturedProducts />
                 <JoinCommunity />
+                <AddMoreV3/>
                 <MarqueeBar />
               </>
             }

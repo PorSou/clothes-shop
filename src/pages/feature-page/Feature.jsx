@@ -22,7 +22,7 @@ const FeaturedProducts = () => {
       className={`py-10 px-4 sm:px-6 md:px-10 lg:px-20 xl:px-40 transition-colors duration-300 ${
         theme === "dark"
           ? "bg-gray-900 text-gray-100"
-          : "bg-[#fdfaf6] text-gray-800"
+          : "bg-gray-50 text-gray-800"
       }`}
     >
       <div className="flex flex-col items-center justify-between mb-8 md:flex-row">

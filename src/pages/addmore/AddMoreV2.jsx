@@ -48,7 +48,7 @@ const AddMoreV2 = () => {
       className={`py-20 ${
         theme === "dark"
           ? "bg-gray-900 text-gray-100"
-          : "bg-[#fdf6ed] text-gray-900"
+          : "bg-gray-50 text-gray-900"
       }`}
     >
       <div className="container px-4 mx-auto text-center">

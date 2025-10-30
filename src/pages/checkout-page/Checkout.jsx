@@ -261,9 +261,6 @@ const Checkout = () => {
           </div>
         </div>
       </main>
-
-      {/* Footer scrolls normally (mobile-friendly) */}
-      <Footer />
     </div>
   );
 };

@@ -8,11 +8,13 @@ import favoriteReducer from "../features/favorite/favoriteSlice";
 import authReducer from "../features/auth/authSlice";
 import themeReducer from "../features/theme/themeSlice";
 
+
 const rootReducer = combineReducers({
   cart: cartReducer,
   favorite: favoriteReducer,
   auth: authReducer,
   theme: themeReducer,
+ 
 });
 
 const persistConfig = {

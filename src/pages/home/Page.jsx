@@ -33,7 +33,7 @@ export default function Home() {
   // 🦴 Skeleton while loading
   if (loading) {
     return (
-      <div className="relative w-full min-h-[500px] md:min-h-[600px] lg:min-h-[700px] flex items-center justify-center bg-gray-200 animate-pulse">
+      <div className="relative w-full min-h-[500px] md:min-h-[600px] lg:min-h-[960px] flex items-center justify-center bg-gray-200 animate-pulse">
         <div className="absolute inset-0 bg-gray-300" />
         <div className="relative z-10 flex flex-col items-center justify-center w-full max-w-5xl px-6 py-12 text-center lg:items-start sm:px-12 lg:px-16 lg:text-left">
           <div className="w-3/4 h-12 mb-4 bg-gray-400 rounded"></div>
@@ -47,7 +47,7 @@ export default function Home() {
 
   // 🌟 Actual Hero Section
   return (
-    <div className="relative w-full min-h-[500px] md:min-h-[600px] lg:min-h-[700px] flex items-center justify-center overflow-hidden">
+    <div className="relative w-full min-h-[500px] md:min-h-[600px] lg:min-h-[960px] flex items-center justify-center overflow-hidden">
       {/* Background Image */}
       <div
         className="absolute inset-0 transition-all duration-1000 bg-center bg-no-repeat bg-cover"

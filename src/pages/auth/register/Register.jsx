@@ -9,6 +9,7 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const theme = useSelector((state) => state.theme.mode);
@@ -16,22 +17,22 @@ const Register = () => {
   const handleRegister = (e) => {
     e.preventDefault();
     setError("");
+    setSuccess("");
     setLoading(true);
 
     setTimeout(() => {
       setLoading(false);
       if (name && email && password) {
-        const fakeUser = {
-          name,
-          email,
-          image:
-            "https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=500&q=80",
-        };
-        const fakeToken = "fake-jwt-token";
-        dispatch(loginSuccess({ user: fakeUser, token: fakeToken }));
-        navigate("/profile", { replace: true });
+        // Save user data to localStorage
+        const newUser = { name, email, password };
+        localStorage.setItem("registeredUser", JSON.stringify(newUser));
+
+        setSuccess("Account created successfully! You can now log in.");
+        setName("");
+        setEmail("");
+        setPassword("");
       } else {
-        setError("Please fill all fields correctly.");
+        setError("Please fill in all fields.");
       }
     }, 1000);
   };
@@ -61,6 +62,11 @@ const Register = () => {
         {error && (
           <div className="p-2 mb-4 text-sm text-red-700 bg-red-100 rounded">
             {error}
+          </div>
+        )}
+        {success && (
+          <div className="p-2 mb-4 text-sm text-green-700 bg-green-100 rounded">
+            {success}
           </div>
         )}
 
@@ -116,7 +122,7 @@ const Register = () => {
           <button
             type="submit"
             disabled={loading}
-            className={`w-full py-2 mt-2 text-white transition duration-200 rounded-lg ${
+            className={`w-full py-2 mt-2 cursor-pointer text-white transition duration-200 rounded-lg ${
               theme === "dark"
                 ? "bg-gray-700 hover:bg-gray-600 disabled:opacity-60"
                 : "bg-gray-600 hover:bg-gray-700 disabled:opacity-60"
